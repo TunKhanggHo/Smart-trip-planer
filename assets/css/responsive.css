@@ -1,0 +1,237 @@
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 992px) {
+
+    .nav-menu {
+        gap: 16px;
+    }
+
+    .nav-link {
+        font-size: 13px;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destination-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .search-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form {
+        max-width: none;
+    }
+
+    .footer-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .footer-column:last-child {
+        grid-column: span 3;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        height: 68px;
+    }
+
+    .nav-menu,
+    .nav-actions {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .hero {
+        min-height: 600px;
+
+        background-position: 65% center;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .search-section {
+        margin-top: -35px;
+    }
+
+    .search-box {
+        padding: 22px;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .features-section,
+    .destinations-section {
+        padding: 65px 0;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .section-heading-flex {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .destination-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-content {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .cta-content h2 {
+        font-size: 28px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 35px;
+    }
+
+    .footer-brand {
+        grid-column: span 2;
+    }
+
+    .footer-column:last-child {
+        grid-column: span 2;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: 90%;
+    }
+
+    .logo {
+        min-width: auto;
+    }
+
+    .logo-text span {
+        font-size: 15px;
+    }
+
+    .hero {
+        min-height: 560px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .destination-image {
+        height: 200px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand,
+    .footer-column:last-child {
+        grid-column: span 1;
+    }
+}
+
+/* =========================================
+   AUTH RESPONSIVE
+========================================= */
+
+@media (max-width: 750px) {
+
+    .auth-card {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-intro {
+        padding: 35px 30px;
+    }
+
+    .auth-intro h1 {
+        font-size: 25px;
+    }
+
+    .auth-feature {
+        margin-bottom: 12px;
+    }
+
+    .auth-form {
+        padding: 35px 30px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .auth-container {
+        padding: 25px 15px;
+    }
+
+    .auth-card {
+        border-radius: 18px;
+    }
+
+    .auth-intro {
+        padding: 30px 25px;
+    }
+
+    .auth-form {
+        padding: 30px 22px;
+    }
+
+}

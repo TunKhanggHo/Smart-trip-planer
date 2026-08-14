@@ -1,0 +1,63 @@
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+.hero-text {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+
+.feature-card {
+    animation: fadeUp 0.7s ease both;
+}
+
+
+.destination-card {
+    animation: fadeUp 0.7s ease both;
+}
+
+
+.logo-icon {
+    animation: float 3s ease-in-out infinite;
+}
