@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Đăng nhập - Smart Trip Planner</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/responsive.css"
+    >
+
+</head>
+
+
+<body class="auth-page">
+
+
+    <header class="header">
+
+        <div class="container navbar">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <div class="logo-text">
+
+                    <span>Smart Trip</span>
+
+                    <small>Planner</small>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Trang chủ
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="auth-container">
+
+        <div class="auth-card">
+
+
+            <!-- INTRO -->
+
+            <div class="auth-intro">
+
+                <div class="auth-intro-icon">
+
+                    <i class="fa-solid fa-plane"></i>
+
+                </div>
+
+
+                <h1>
+                    Chào mừng trở lại! 👋
+                </h1>
+
+
+                <p>
+                    Đăng nhập để tiếp tục
+                    quản lý những chuyến đi
+                    và lịch trình của bạn.
+                </p>
+
+
+                <div class="auth-feature">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                    <span>
+                        Quản lý lịch trình
+                    </span>
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <i class="fa-solid fa-bookmark"></i>
+
+                    <span>
+                        Lưu địa điểm yêu thích
+                    </span>
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <i class="fa-solid fa-route"></i>
+
+                    <span>
+                        Theo dõi hành trình
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <div class="auth-form">
+
+                <div class="auth-form-title">
+
+                    <h2>
+                        Đăng nhập
+                    </h2>
+
+                    <p>
+                        Nhập thông tin tài khoản
+                        của bạn
+                    </p>
+
+                </div>
+
+
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="loginEmail">
+                            Email
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="loginEmail"
+                                placeholder="example@gmail.com"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="loginPassword">
+                            Mật khẩu
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Nhập mật khẩu"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="loginPassword"
+                            >
+
+                                <i class="fa-regular fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ERROR -->
+
+                    <div
+                        class="auth-message error"
+                        id="loginError"
+                    ></div>
+
+
+
+                    <!-- SUCCESS -->
+
+                    <div
+                        class="auth-message success"
+                        id="loginSuccess"
+                    ></div>
+
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                    >
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        Đăng nhập
+
+                    </button>
+
+
+                </form>
+
+
+
+                <div class="auth-switch">
+
+                    Chưa có tài khoản?
+
+                    <a href="register.html">
+                        Đăng ký ngay
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <script src="assets/js/auth.js"></script>
+
+</body>
+
+</html>

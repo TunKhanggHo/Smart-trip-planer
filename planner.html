@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Lập lịch trình - Smart Trip Planner</title>
+
+
+    <!-- Google Font -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- CSS chung -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/responsive.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/animation.css"
+    >
+
+
+    <style>
+
+        /* =========================================
+           PLANNER HEADER
+        ========================================= */
+
+        .planner-header {
+
+            padding: 65px 0;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f8f3,
+                    #eaf6ff
+                );
+
+        }
+
+
+        .planner-header h1 {
+
+            margin-bottom: 12px;
+
+            font-size: clamp(32px, 5vw, 46px);
+
+        }
+
+
+        .planner-header p {
+
+            max-width: 620px;
+
+            margin: auto;
+
+            color: var(--text-gray);
+
+            line-height: 1.7;
+
+            font-size: 15px;
+
+        }
+
+
+
+        /* =========================================
+           PLANNER SECTION
+        ========================================= */
+
+        .planner-section {
+
+            padding: 60px 0 90px;
+
+            background: #f8fafc;
+
+        }
+
+
+        .planner-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                370px
+                minmax(0, 1fr);
+
+            gap: 30px;
+
+            align-items: start;
+
+        }
+
+
+
+        /* =========================================
+           FORM CARD
+        ========================================= */
+
+        .planner-form-card {
+
+            position: sticky;
+
+            top: 90px;
+
+            padding: 28px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            background: white;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        .planner-form-card h2 {
+
+            margin-bottom: 8px;
+
+            font-size: 22px;
+
+        }
+
+
+        .planner-form-card > p {
+
+            margin-bottom: 25px;
+
+            color: var(--text-gray);
+
+            line-height: 1.6;
+
+            font-size: 13px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: var(--text-dark);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .form-label i {
+
+            margin-right: 5px;
+
+            color: var(--primary);
+
+        }
+
+
+        .form-input {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 14px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: white;
+
+            color: var(--text-dark);
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .form-input:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(22,160,133,0.1);
+
+        }
+
+
+        .form-row {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+
+        }
+
+
+        .budget-input {
+
+            position: relative;
+
+        }
+
+
+        .budget-input span {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--text-gray);
+
+            font-size: 12px;
+
+        }
+
+
+        .budget-input .form-input {
+
+            padding-right: 55px;
+
+        }
+
+
+        .generate-btn {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 8px;
+
+            width: 100%;
+
+            height: 50px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .generate-btn:hover {
+
+            transform: translateY(-2px);
+
+            filter: brightness(0.95);
+
+        }
+
+
+
+        /* =========================================
+           SELECTED DESTINATION
+        ========================================= */
+
+        .selected-destination {
+
+            display: none;
+
+            margin-bottom: 20px;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: #ecfdf5;
+
+        }
+
+
+        .selected-destination.show {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .selected-destination-icon {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 40px;
+
+            height: 40px;
+
+            flex-shrink: 0;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: white;
+
+        }
+
+
+        .selected-destination small {
+
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+        }
+
+
+        .selected-destination strong {
+
+            color: var(--text-dark);
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* =========================================
+           RESULT AREA
+        ========================================= */
+
+        .planner-result {
+
+            min-width: 0;
+
+        }
+
+
+        .empty-planner {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 500px;
+
+            padding: 40px;
+
+            border: 2px dashed #dbe4e8;
+
+            border-radius: 20px;
+
+            background: white;
+
+            text-align: center;
+
+        }
+
+
+        .empty-planner-icon {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 80px;
+
+            height: 80px;
+
+            margin-bottom: 20px;
+
+            border-radius: 50%;
+
+            background: #ecfdf5;
+
+            color: var(--primary);
+
+            font-size: 30px;
+
+        }
+
+
+        .empty-planner h2 {
+
+            margin-bottom: 8px;
+
+            font-size: 22px;
+
+        }
+
+
+        .empty-planner p {
+
+            max-width: 450px;
+
+            color: var(--text-gray);
+
+            line-height: 1.7;
+
+            font-size: 13px;
+
+        }
+
+
+
+        /* =========================================
+           RESULT HEADER
+        ========================================= */
+
+        .result-header {
+
+            display: none;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .result-header.show {
+
+            display: flex;
+
+        }
+
+
+        .result-header h2 {
+
+            font-size: 24px;
+
+        }
+
+
+        .result-header p {
+
+            margin-top: 5px;
+
+            color: var(--text-gray);
+
+            font-size: 13px;
+
+        }
+
+
+        .save-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 11px 16px;
+
+            border: 1px solid var(--primary);
+
+            border-radius: 10px;
+
+            background: white;
+
+            color: var(--primary);
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+
+        .save-btn:hover {
+
+            background: var(--primary);
+
+            color: white;
+
+        }
+
+
+
+        /* =========================================
+           TRIP SUMMARY
+        ========================================= */
+
+        .trip-summary {
+
+            display: none;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .trip-summary.show {
+
+            display: grid;
+
+        }
+
+
+        .summary-card {
+
+            padding: 17px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            background: white;
+
+        }
+
+
+        .summary-card i {
+
+            margin-bottom: 8px;
+
+            color: var(--primary);
+
+            font-size: 18px;
+
+        }
+
+
+        .summary-card span {
+
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: var(--text-gray);
+
+            font-size: 11px;
+
+        }
+
+
+        .summary-card strong {
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* =========================================
+           DAY CARD
+        ========================================= */
+
+        .day-card {
+
+            margin-bottom: 18px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+        .day-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 17px 20px;
+
+            background: #f0fdf9;
+
+            border-bottom: 1px solid #dcefe9;
+
+        }
+
+
+        .day-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .day-number {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 9px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .day-title h3 {
+
+            font-size: 15px;
+
+        }
+
+
+        .day-title span {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color: var(--text-gray);
+
+            font-size: 11px;
+
+        }
+
+
+        .day-budget {
+
+            color: var(--primary);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        /* =========================================
+           TIMELINE
+        ========================================= */
+
+        .timeline {
+
+            padding: 8px 20px 18px;
+
+        }
+
+
+        .timeline-item {
+
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns: 65px 35px minmax(0, 1fr);
+
+            gap: 8px;
+
+            min-height: 72px;
+
+            padding-top: 15px;
+
+        }
+
+
+        .timeline-time {
+
+            padding-top: 4px;
+
+            color: var(--text-gray);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .timeline-icon {
+
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+
+        }
+
+
+        .timeline-icon::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 27px;
+
+            bottom: -25px;
+
+            width: 1px;
+
+            background: #dbe4e8;
+
+        }
+
+
+        .timeline-item:last-child
+        .timeline-icon::before {
+
+            display: none;
+
+        }
+
+
+        .timeline-icon i {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            background: #ecfdf5;
+
+            color: var(--primary);
+
+            font-size: 12px;
+
+        }
+
+
+        .timeline-content h4 {
+
+            margin-bottom: 5px;
+
+            font-size: 13px;
+
+        }
+
+
+        .timeline-content p {
+
+            color: var(--text-gray);
+
+            line-height: 1.5;
+
+            font-size: 11px;
+
+        }
+
+
+
+        /* =========================================
+           SMART NOTE
+        ========================================= */
+
+        .smart-note {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 22px;
+
+            padding: 18px;
+
+            border: 1px solid #bae6fd;
+
+            border-radius: 14px;
+
+            background: #f0f9ff;
+
+        }
+
+
+        .smart-note i {
+
+            color: #0284c7;
+
+            font-size: 19px;
+
+        }
+
+
+        .smart-note strong {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #0369a1;
+
+            font-size: 13px;
+
+        }
+
+
+        .smart-note p {
+
+            color: #475569;
+
+            line-height: 1.6;
+
+            font-size: 11px;
+
+        }
+
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 1000px) {
+
+            .planner-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .planner-form-card {
+
+                position: static;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .planner-section {
+
+                padding: 40px 0 60px;
+
+            }
+
+
+            .form-row {
+
+                grid-template-columns: 1fr;
+
+                gap: 0;
+
+            }
+
+
+            .trip-summary {
+
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+
+            .result-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+
+            .timeline-item {
+
+                grid-template-columns:
+                    50px 35px minmax(0, 1fr);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         HEADER
+    ========================================= -->
+
+    <header class="header">
+
+        <div class="container navbar">
+
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+
+                <div class="logo-text">
+
+                    <span>Smart Trip</span>
+
+                    <small>Planner</small>
+
+                </div>
+
+            </a>
+
+
+
+            <nav class="nav-menu">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Trang chủ
+
+                </a>
+
+
+                <a
+                    href="destinations.html"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-compass"></i>
+
+                    Khám phá
+
+                </a>
+
+
+                <a
+                    href="planner.html"
+                    class="nav-link active"
+                >
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Lập lịch trình
+
+                </a>
+
+
+                <a
+                    href="itinerary.html"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-map"></i>
+
+                    Lịch trình của tôi
+
+                </a>
+
+            </nav>
+
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="login-btn"
+                >
+                    Đăng nhập
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="register-btn"
+                >
+                    Đăng ký
+                </a>
+
+            </div>
+
+
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         PAGE HEADER
+    ========================================= -->
+
+    <section class="planner-header">
+
+        <div class="container">
+
+            <h1>
+                Lập lịch trình thông minh ✨
+            </h1>
+
+            <p>
+                Cho chúng tôi biết điểm đến,
+                thời gian, số người và ngân sách.
+                Smart Trip Planner sẽ gợi ý
+                lịch trình phù hợp cho bạn.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         PLANNER
+    ========================================= -->
+
+    <main class="planner-section">
+
+        <div class="container">
+
+
+            <div class="planner-layout">
+
+
+                <!-- =================================
+                     FORM
+                ================================= -->
+
+                <aside class="planner-form-card">
+
+
+                    <h2>
+                        Thông tin chuyến đi
+                    </h2>
+
+
+                    <p>
+                        Nhập thông tin để tạo
+                        lịch trình phù hợp.
+                    </p>
+
+
+                    <!-- Selected destination -->
+
+                    <div
+                        class="selected-destination"
+                        id="selectedDestination"
+                    >
+
+                        <div class="selected-destination-icon">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <small>
+                                Điểm đến đã chọn
+                            </small>
+
+                            <strong id="selectedDestinationName">
+                                ---
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Destination -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="destinationInput"
+                        >
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Điểm đến
+
+                        </label>
+
+
+                        <select
+                            id="destinationInput"
+                            class="form-input"
+                        >
+
+                            <option value="">
+                                -- Chọn điểm đến --
+                            </option>
+
+                            <option value="Đà Lạt">
+                                Đà Lạt
+                            </option>
+
+                            <option value="Đà Nẵng">
+                                Đà Nẵng
+                            </option>
+
+                            <option value="Phú Quốc">
+                                Phú Quốc
+                            </option>
+
+                            <option value="Nha Trang">
+                                Nha Trang
+                            </option>
+
+                            <option value="Sapa">
+                                Sapa
+                            </option>
+
+                            <option value="Hà Nội">
+                                Hà Nội
+                            </option>
+
+                            <option value="Hội An">
+                                Hội An
+                            </option>
+
+                            <option value="Mộc Châu">
+                                Mộc Châu
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Dates -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="startDate"
+                            >
+
+                                <i class="fa-solid fa-calendar"></i>
+
+                                Ngày đi
+
+                            </label>
+
+
+                            <input
+                                type="date"
+                                id="startDate"
+                                class="form-input"
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label
+                                class="form-label"
+                                for="numberOfDays"
+                            >
+
+                                <i class="fa-solid fa-clock"></i>
+
+                                Số ngày
+
+                            </label>
+
+
+                            <select
+                                id="numberOfDays"
+                                class="form-input"
+                            >
+
+                                <option value="2">
+                                    2 ngày
+                                </option>
+
+                                <option
+                                    value="3"
+                                    selected
+                                >
+                                    3 ngày
+                                </option>
+
+                                <option value="4">
+                                    4 ngày
+                                </option>
+
+                                <option value="5">
+                                    5 ngày
+                                </option>
+
+                                <option value="6">
+                                    6 ngày
+                                </option>
+
+                                <option value="7">
+                                    7 ngày
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- People -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="numberOfPeople"
+                        >
+
+                            <i class="fa-solid fa-users"></i>
+
+                            Số người
+
+                        </label>
+
+
+                        <select
+                            id="numberOfPeople"
+                            class="form-input"
+                        >
+
+                            <option value="1">
+                                1 người
+                            </option>
+
+                            <option
+                                value="2"
+                                selected
+                            >
+                                2 người
+                            </option>
+
+                            <option value="3">
+                                3 người
+                            </option>
+
+                            <option value="4">
+                                4 người
+                            </option>
+
+                            <option value="5">
+                                5 người
+                            </option>
+
+                            <option value="6">
+                                6 người
+                            </option>
+
+                            <option value="8">
+                                8 người
+                            </option>
+
+                            <option value="10">
+                                10 người
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Budget -->
+
+                    <div class="form-group">
+
+                        <label
+                            class="form-label"
+                            for="budgetInput"
+                        >
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                            Ngân sách dự kiến
+
+                        </label>
+
+
+                        <div class="budget-input">
+
+                            <input
+                                type="number"
+                                id="budgetInput"
+                                class="form-input"
+                                placeholder="5000000"
+                                min="500000"
+                            >
+
+                            <span>
+                                VNĐ
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Generate -->
+
+                    <button
+                        class="generate-btn"
+                        id="generateBtn"
+                    >
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                        Tạo lịch trình thông minh
+
+                    </button>
+
+
+                </aside>
+
+
+
+                <!-- =================================
+                     RESULT
+                ================================= -->
+
+                <section class="planner-result">
+
+
+                    <!-- Empty -->
+
+                    <div
+                        class="empty-planner"
+                        id="emptyPlanner"
+                    >
+
+                        <div class="empty-planner-icon">
+
+                            <i class="fa-solid fa-route"></i>
+
+                        </div>
+
+
+                        <h2>
+                            Chưa có lịch trình
+                        </h2>
+
+
+                        <p>
+                            Hãy nhập thông tin chuyến đi
+                            ở bên trái và nhấn
+                            <strong>
+                                "Tạo lịch trình thông minh"
+                            </strong>
+                            để bắt đầu.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- Result header -->
+
+                    <div
+                        class="result-header"
+                        id="resultHeader"
+                    >
+
+                        <div>
+
+                            <h2>
+                                Lịch trình đề xuất
+                            </h2>
+
+                            <p id="resultDescription">
+                                Lịch trình dành cho bạn
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="save-btn"
+                            id="saveBtn"
+                        >
+
+                            <i class="fa-solid fa-bookmark"></i>
+
+                            Lưu lịch trình
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- Summary -->
+
+                    <div
+                        class="trip-summary"
+                        id="tripSummary"
+                    >
+
+
+                        <div class="summary-card">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+                                Điểm đến
+                            </span>
+
+                            <strong id="summaryDestination">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-card">
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                            <span>
+                                Thời gian
+                            </span>
+
+                            <strong id="summaryDays">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-card">
+
+                            <i class="fa-solid fa-users"></i>
+
+                            <span>
+                                Số người
+                            </span>
+
+                            <strong id="summaryPeople">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                        <div class="summary-card">
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                            <span>
+                                Ngân sách
+                            </span>
+
+                            <strong id="summaryBudget">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- Generated itinerary -->
+
+                    <div id="itineraryResult"></div>
+
+
+
+                    <!-- Smart note -->
+
+                    <div
+                        class="smart-note"
+                        id="smartNote"
+                        style="display:none;"
+                    >
+
+                        <i class="fa-solid fa-lightbulb"></i>
+
+                        <div>
+
+                            <strong>
+                                Smart Suggestion
+                            </strong>
+
+                            <p id="smartNoteText">
+                                Lịch trình được đề xuất
+                                dựa trên thông tin chuyến đi.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="index.html"
+                    class="logo footer-logo"
+                >
+
+                    <div class="logo-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+
+                    <div class="logo-text">
+
+                        <span>Smart Trip</span>
+
+                        <small>Planner</small>
+
+                    </div>
+
+                </a>
+
+
+                <p>
+                    Lên kế hoạch chuyến đi dễ dàng,
+                    khám phá nhiều hơn và tận hưởng
+                    hành trình theo cách của bạn.
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Khám phá
+                </h3>
+
+                <a href="destinations.html">
+                    Địa điểm
+                </a>
+
+                <a href="planner.html">
+                    Lập lịch trình
+                </a>
+
+                <a href="itinerary.html">
+                    Lịch trình của tôi
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Tài khoản
+                </h3>
+
+                <a href="login.html">
+                    Đăng nhập
+                </a>
+
+                <a href="register.html">
+                    Đăng ký
+                </a>
+
+                <a href="profile.html">
+                    Hồ sơ
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Liên hệ
+                </h3>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    support@smarttrip.vn
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    0123 456 789
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Smart Trip Planner.
+                    All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/destinations.js"></script>
+
+    <script src="assets/js/planner.js"></script>
+
+</body>
+
+</html>

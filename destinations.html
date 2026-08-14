@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Khám phá địa điểm - Smart Trip Planner</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/animation.css">
+
+    <!-- CSS riêng trang destinations -->
+    <style>
+
+        /* =========================
+           PAGE HEADER
+        ========================= */
+
+        .page-header {
+            padding: 75px 0 85px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f8f3,
+                    #eaf6ff
+                );
+
+            text-align: center;
+        }
+
+        .breadcrumb {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 18px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+
+            font-weight: 600;
+        }
+
+        .page-header h1 {
+            margin-bottom: 12px;
+
+            font-size: clamp(34px, 5vw, 48px);
+
+            line-height: 1.2;
+        }
+
+        .page-header p {
+            max-width: 600px;
+
+            margin: auto;
+
+            color: var(--text-gray);
+
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           DESTINATION PAGE
+        ========================= */
+
+        .destination-page {
+            padding: 60px 0 90px;
+        }
+
+
+        /* Search */
+
+        .destination-search {
+            max-width: 700px;
+
+            margin: 0 auto 35px;
+
+            position: relative;
+        }
+
+        .destination-search i {
+            position: absolute;
+
+            left: 18px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--primary);
+
+            font-size: 17px;
+        }
+
+        .destination-search input {
+            width: 100%;
+
+            height: 55px;
+
+            padding: 0 50px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            outline: none;
+
+            background: white;
+
+            font-size: 14px;
+
+            box-shadow: var(--shadow-sm);
+
+            transition: 0.3s;
+        }
+
+        .destination-search input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(22, 160, 133, 0.1);
+        }
+
+
+        /* Filter */
+
+        .filter-list {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 45px;
+        }
+
+        .filter-btn {
+            padding: 10px 18px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 30px;
+
+            background: white;
+
+            color: #6b7280;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            border-color: var(--primary);
+
+            background: var(--primary);
+
+            color: white;
+        }
+
+
+        /* Results */
+
+        .results-info {
+            margin-bottom: 20px;
+
+            color: var(--text-gray);
+
+            font-size: 14px;
+        }
+
+        .results-info strong {
+            color: var(--text-dark);
+        }
+
+
+        /* Grid */
+
+        .destinations-grid-page {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* Empty */
+
+        .empty-result {
+            grid-column: 1 / -1;
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+            color: var(--text-gray);
+        }
+
+        .empty-result i {
+            margin-bottom: 15px;
+
+            color: #cbd5e1;
+
+            font-size: 50px;
+        }
+
+        .empty-result h3 {
+            margin-bottom: 7px;
+
+            color: var(--text-dark);
+        }
+
+
+        /* Responsive */
+
+        @media (max-width: 992px) {
+
+            .destinations-grid-page {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .page-header {
+                padding: 55px 0 65px;
+            }
+
+            .destination-page {
+                padding: 45px 0 70px;
+            }
+
+            .destinations-grid-page {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-list {
+                justify-content: flex-start;
+
+                overflow-x: auto;
+
+                padding-bottom: 5px;
+
+                flex-wrap: nowrap;
+            }
+
+            .filter-btn {
+                flex-shrink: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="container navbar">
+
+
+            <!-- Logo -->
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div class="logo-text">
+                    <span>Smart Trip</span>
+                    <small>Planner</small>
+                </div>
+
+            </a>
+
+
+            <!-- Navigation -->
+
+            <nav class="nav-menu">
+
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house"></i>
+                    Trang chủ
+                </a>
+
+                <a href="destinations.html" class="nav-link active">
+                    <i class="fa-solid fa-compass"></i>
+                    Khám phá
+                </a>
+
+                <a href="planner.html" class="nav-link">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Lập lịch trình
+                </a>
+
+                <a href="itinerary.html" class="nav-link">
+                    <i class="fa-solid fa-map"></i>
+                    Lịch trình của tôi
+                </a>
+
+            </nav>
+
+
+            <!-- Actions -->
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="login-btn">
+                    Đăng nhập
+                </a>
+
+                <a href="register.html" class="register-btn">
+                    Đăng ký
+                </a>
+
+            </div>
+
+
+            <!-- Mobile -->
+
+            <button class="menu-toggle" id="menuToggle">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <section class="page-header">
+
+        <div class="container">
+
+            <div class="breadcrumb">
+
+                <a href="index.html">
+                    Trang chủ
+                </a>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+                <span>
+                    Khám phá
+                </span>
+
+            </div>
+
+
+            <h1>
+                Khám phá điểm đến
+            </h1>
+
+            <p>
+                Tìm kiếm những địa điểm tuyệt vời cho
+                chuyến đi tiếp theo của bạn.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= DESTINATIONS ================= -->
+
+    <main class="destination-page">
+
+        <div class="container">
+
+
+            <!-- Search -->
+
+            <div class="destination-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="destinationSearch"
+                    placeholder="Tìm kiếm địa điểm..."
+                >
+
+            </div>
+
+
+
+            <!-- Filter -->
+
+            <div class="filter-list" id="filterList">
+
+                <button
+                    class="filter-btn active"
+                    data-category="all"
+                >
+                    Tất cả
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="biển"
+                >
+                    🏖️ Biển
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="núi"
+                >
+                    🏔️ Núi
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="thành phố"
+                >
+                    🏙️ Thành phố
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="thiên nhiên"
+                >
+                    🌿 Thiên nhiên
+                </button>
+
+            </div>
+
+
+
+            <!-- Result -->
+
+            <div class="results-info">
+
+                Hiển thị
+                <strong id="resultCount">0</strong>
+                địa điểm
+
+            </div>
+
+
+
+            <!-- Destination Cards -->
+
+            <div
+                class="destinations-grid-page"
+                id="destinationGrid"
+            >
+
+                <!-- JavaScript sẽ render ở đây -->
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo footer-logo">
+
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <div class="logo-text">
+                        <span>Smart Trip</span>
+                        <small>Planner</small>
+                    </div>
+
+                </a>
+
+                <p>
+                    Lên kế hoạch chuyến đi dễ dàng,
+                    khám phá nhiều hơn và tận hưởng
+                    hành trình theo cách của bạn.
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="#">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>Khám phá</h3>
+
+                <a href="destinations.html">
+                    Địa điểm
+                </a>
+
+                <a href="planner.html">
+                    Lập lịch trình
+                </a>
+
+                <a href="itinerary.html">
+                    Lịch trình của tôi
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>Tài khoản</h3>
+
+                <a href="login.html">
+                    Đăng nhập
+                </a>
+
+                <a href="register.html">
+                    Đăng ký
+                </a>
+
+                <a href="profile.html">
+                    Hồ sơ
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>Liên hệ</h3>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    support@smarttrip.vn
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    0123 456 789
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Smart Trip Planner.
+                    All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- JavaScript -->
+
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/destinations.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Chi tiết địa điểm - Smart Trip Planner</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/responsive.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/animation.css"
+    >
+
+
+    <style>
+
+        /* =================================
+           DETAIL HERO
+        ================================= */
+
+        .detail-hero {
+
+            position: relative;
+
+            min-height: 430px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            overflow: hidden;
+
+            background: #0f172a;
+        }
+
+
+        .detail-hero-image {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .detail-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, 0.8),
+                    rgba(0, 0, 0, 0.15)
+                );
+        }
+
+
+        .detail-hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            padding: 60px 0 45px;
+
+            color: white;
+        }
+
+
+        .detail-breadcrumb {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 13px;
+
+            color: rgba(255,255,255,0.75);
+        }
+
+
+        .detail-breadcrumb a {
+
+            color: white;
+
+            font-weight: 600;
+        }
+
+
+        .detail-tag {
+
+            display: inline-block;
+
+            padding: 7px 14px;
+
+            margin-bottom: 15px;
+
+            border-radius: 20px;
+
+            background: rgba(22,160,133,0.95);
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .detail-hero h1 {
+
+            margin-bottom: 12px;
+
+            font-size: clamp(38px, 6vw, 58px);
+
+            line-height: 1.1;
+        }
+
+
+        .detail-meta {
+
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            font-size: 14px;
+        }
+
+
+        .detail-meta span {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+
+        .detail-rating i {
+
+            color: #fbbf24;
+        }
+
+
+
+        /* =================================
+           DETAIL CONTENT
+        ================================= */
+
+        .detail-section {
+
+            padding: 65px 0 90px;
+        }
+
+
+        .detail-layout {
+
+            display: grid;
+
+            grid-template-columns: minmax(0, 1fr) 350px;
+
+            gap: 35px;
+
+            align-items: start;
+        }
+
+
+        /* =================================
+           MAIN CONTENT
+        ================================= */
+
+        .detail-main {
+
+            min-width: 0;
+        }
+
+
+        .detail-block {
+
+            margin-bottom: 35px;
+
+            padding-bottom: 30px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+
+        .detail-block:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .detail-block h2 {
+
+            margin-bottom: 15px;
+
+            font-size: 24px;
+        }
+
+
+        .detail-description {
+
+            color: var(--text-gray);
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        /* =================================
+           INFO CARDS
+        ================================= */
+
+        .info-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+
+        .info-card {
+
+            padding: 20px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+        }
+
+
+        .info-card i {
+
+            margin-bottom: 12px;
+
+            color: var(--primary);
+
+            font-size: 22px;
+        }
+
+
+        .info-card span {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--text-gray);
+
+            font-size: 12px;
+        }
+
+
+        .info-card strong {
+
+            display: block;
+
+            font-size: 15px;
+        }
+
+
+
+        /* =================================
+           ACTIVITIES
+        ================================= */
+
+        .activity-list {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+
+        .activity-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: #f8fafc;
+
+            color: var(--text-dark);
+
+            font-size: 14px;
+        }
+
+
+        .activity-item i {
+
+            color: var(--primary);
+
+            font-size: 17px;
+        }
+
+
+
+        /* =================================
+           SIDEBAR
+        ================================= */
+
+        .detail-sidebar {
+
+            position: sticky;
+
+            top: 90px;
+        }
+
+
+        .planner-card {
+
+            padding: 28px;
+
+            border-radius: 20px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            box-shadow: var(--shadow);
+        }
+
+
+        .planner-card h3 {
+
+            margin-bottom: 10px;
+
+            font-size: 21px;
+        }
+
+
+        .planner-card > p {
+
+            margin-bottom: 22px;
+
+            color: var(--text-gray);
+
+            line-height: 1.6;
+
+            font-size: 13px;
+        }
+
+
+        .estimated-cost {
+
+            margin-bottom: 20px;
+
+            padding: 18px;
+
+            border-radius: 14px;
+
+            background: #ecfdf5;
+        }
+
+
+        .estimated-cost span {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        .estimated-cost strong {
+
+            color: var(--primary);
+
+            font-size: 20px;
+        }
+
+
+        .add-planner-btn {
+
+            width: 100%;
+
+            padding: 14px 20px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .add-planner-btn:hover {
+
+            transform: translateY(-2px);
+
+            filter: brightness(0.95);
+        }
+
+
+        .back-btn {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 8px;
+
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 13px 20px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: white;
+
+            color: var(--text-dark);
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+
+        /* =================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 900px) {
+
+            .detail-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .detail-sidebar {
+
+                position: static;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .detail-hero {
+
+                min-height: 390px;
+            }
+
+
+            .detail-hero-content {
+
+                padding-bottom: 35px;
+            }
+
+
+            .detail-section {
+
+                padding: 45px 0 65px;
+            }
+
+
+            .info-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .activity-list {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .planner-card {
+
+                padding: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         HEADER
+    ================================= -->
+
+    <header class="header">
+
+        <div class="container navbar">
+
+
+            <a href="index.html" class="logo">
+
+                <div class="logo-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <div class="logo-text">
+
+                    <span>Smart Trip</span>
+
+                    <small>Planner</small>
+
+                </div>
+
+            </a>
+
+
+
+            <nav class="nav-menu">
+
+                <a href="index.html" class="nav-link">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Trang chủ
+
+                </a>
+
+
+                <a
+                    href="destinations.html"
+                    class="nav-link active"
+                >
+
+                    <i class="fa-solid fa-compass"></i>
+
+                    Khám phá
+
+                </a>
+
+
+                <a href="planner.html" class="nav-link">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Lập lịch trình
+
+                </a>
+
+
+                <a href="itinerary.html" class="nav-link">
+
+                    <i class="fa-solid fa-map"></i>
+
+                    Lịch trình của tôi
+
+                </a>
+
+            </nav>
+
+
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="login-btn">
+
+                    Đăng nhập
+
+                </a>
+
+
+                <a href="register.html" class="register-btn">
+
+                    Đăng ký
+
+                </a>
+
+            </div>
+
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================
+         HERO DETAIL
+    ================================= -->
+
+    <section class="detail-hero">
+
+
+        <img
+            id="detailHeroImage"
+            class="detail-hero-image"
+            src=""
+            alt=""
+        >
+
+
+        <div class="detail-overlay"></div>
+
+
+        <div class="detail-hero-content">
+
+            <div class="container">
+
+
+                <div class="detail-breadcrumb">
+
+                    <a href="index.html">
+                        Trang chủ
+                    </a>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                    <a href="destinations.html">
+                        Khám phá
+                    </a>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                    <span id="breadcrumbName">
+                        Chi tiết
+                    </span>
+
+                </div>
+
+
+                <span
+                    class="detail-tag"
+                    id="detailTag"
+                >
+                    Nổi bật
+                </span>
+
+
+                <h1 id="detailName">
+                    Đang tải...
+                </h1>
+
+
+                <div class="detail-meta">
+
+                    <span>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <span id="detailLocation">
+                            ---
+                        </span>
+
+                    </span>
+
+
+                    <span class="detail-rating">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        <strong id="detailRating">
+                            0.0
+                        </strong>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================
+         CONTENT
+    ================================= -->
+
+    <main class="detail-section">
+
+        <div class="container">
+
+
+            <div class="detail-layout">
+
+
+                <!-- =========================
+                     MAIN
+                ========================= -->
+
+                <div class="detail-main">
+
+
+                    <!-- Description -->
+
+                    <section class="detail-block">
+
+                        <h2>
+                            Giới thiệu
+                        </h2>
+
+                        <p
+                            class="detail-description"
+                            id="detailDescription"
+                        >
+                            Đang tải thông tin...
+                        </p>
+
+                    </section>
+
+
+
+                    <!-- Information -->
+
+                    <section class="detail-block">
+
+                        <h2>
+                            Thông tin chuyến đi
+                        </h2>
+
+
+                        <div class="info-grid">
+
+
+                            <div class="info-card">
+
+                                <i class="fa-solid fa-wallet"></i>
+
+                                <span>
+                                    Chi phí dự kiến
+                                </span>
+
+                                <strong id="detailCost">
+                                    ---
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-card">
+
+                                <i class="fa-solid fa-cloud-sun"></i>
+
+                                <span>
+                                    Thời tiết
+                                </span>
+
+                                <strong id="detailWeather">
+                                    ---
+                                </strong>
+
+                            </div>
+
+
+                            <div class="info-card">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                                <span>
+                                    Thời gian lý tưởng
+                                </span>
+
+                                <strong id="detailBestTime">
+                                    ---
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- Activities -->
+
+                    <section class="detail-block">
+
+                        <h2>
+                            Gợi ý trải nghiệm
+                        </h2>
+
+
+                        <div
+                            class="activity-list"
+                            id="activityList"
+                        >
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+
+                <!-- =========================
+                     SIDEBAR
+                ========================= -->
+
+                <aside class="detail-sidebar">
+
+
+                    <div class="planner-card">
+
+
+                        <h3>
+                            Lên kế hoạch chuyến đi
+                        </h3>
+
+
+                        <p>
+                            Thêm địa điểm này vào kế hoạch
+                            để bắt đầu xây dựng lịch trình
+                            chuyến đi của bạn.
+                        </p>
+
+
+                        <div class="estimated-cost">
+
+                            <span>
+                                Chi phí tham khảo
+                            </span>
+
+                            <strong id="sidebarCost">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            class="add-planner-btn"
+                            id="addPlannerBtn"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Thêm vào lịch trình
+
+                        </button>
+
+
+                        <a
+                            href="destinations.html"
+                            class="back-btn"
+                        >
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Quay lại khám phá
+
+                        </a>
+
+                    </div>
+
+                </aside>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =================================
+         FOOTER
+    ================================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo footer-logo">
+
+                    <div class="logo-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+                    <div class="logo-text">
+
+                        <span>Smart Trip</span>
+
+                        <small>Planner</small>
+
+                    </div>
+
+                </a>
+
+
+                <p>
+                    Lên kế hoạch chuyến đi dễ dàng,
+                    khám phá nhiều hơn và tận hưởng
+                    hành trình theo cách của bạn.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Khám phá</h3>
+
+                <a href="destinations.html">
+                    Địa điểm
+                </a>
+
+                <a href="planner.html">
+                    Lập lịch trình
+                </a>
+
+                <a href="itinerary.html">
+                    Lịch trình của tôi
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Tài khoản</h3>
+
+                <a href="login.html">
+                    Đăng nhập
+                </a>
+
+                <a href="register.html">
+                    Đăng ký
+                </a>
+
+                <a href="profile.html">
+                    Hồ sơ
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Liên hệ</h3>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    support@smarttrip.vn
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    0123 456 789
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Smart Trip Planner.
+                    All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- JS -->
+
+    <script src="assets/js/main.js"></script>
+
+    <!-- Phải load destinations.js trước -->
+    <script src="assets/js/destinations.js"></script>
+
+    <!-- Sau đó mới tới detail -->
+    <script src="assets/js/destination-detail.js"></script>
+
+</body>
+
+</html>

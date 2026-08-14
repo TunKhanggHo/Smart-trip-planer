@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Trip Planner - Lên lịch đi trốn</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/animation.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+
+        <div class="container navbar">
+
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div class="logo-text">
+                    <span>Smart Trip</span>
+                    <small>Planner</small>
+                </div>
+            </a>
+
+
+            <!-- Navigation -->
+            <nav class="nav-menu">
+
+                <a href="index.html" class="nav-link active">
+                    <i class="fa-solid fa-house"></i>
+                    Trang chủ
+                </a>
+
+                <a href="destinations.html" class="nav-link">
+                    <i class="fa-solid fa-compass"></i>
+                    Khám phá
+                </a>
+
+                <a href="planner.html" class="nav-link">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Lập lịch trình
+                </a>
+
+                <a href="itinerary.html" class="nav-link">
+                    <i class="fa-solid fa-map"></i>
+                    Lịch trình của tôi
+                </a>
+
+            </nav>
+
+
+            <!-- User actions -->
+            <div class="nav-actions">
+
+                <a href="login.html" class="login-btn">
+                    Đăng nhập
+                </a>
+
+                <a href="register.html" class="register-btn">
+                    Đăng ký
+                </a>
+
+            </div>
+
+
+            <!-- Mobile menu -->
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= HERO ================= -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <span class="hero-badge">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Lên lịch chuyến đi thông minh
+                    </span>
+
+                    <h1>
+                        Lên lịch đi trốn,
+                        <span>khám phá nhiều hơn.</span>
+                    </h1>
+
+                    <p>
+                        Tìm địa điểm yêu thích, thiết lập ngân sách
+                        và tạo lịch trình du lịch phù hợp với bạn.
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a href="planner.html" class="btn btn-primary">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                            Lập kế hoạch ngay
+                        </a>
+
+                        <a href="destinations.html" class="btn btn-outline">
+                            <i class="fa-solid fa-compass"></i>
+                            Khám phá địa điểm
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= SEARCH ================= -->
+        <section class="search-section">
+
+            <div class="container">
+
+                <div class="search-box">
+
+                    <div class="search-title">
+                        <h2>Bạn muốn đi đâu?</h2>
+                        <p>Tìm kiếm điểm đến cho chuyến đi tiếp theo</p>
+                    </div>
+
+
+                    <form class="search-form" id="searchForm">
+
+                        <div class="search-input">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <input
+                                type="text"
+                                id="searchInput"
+                                placeholder="Ví dụ: Đà Lạt, Đà Nẵng..."
+                            >
+
+                        </div>
+
+
+                        <button type="submit" class="search-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            Tìm kiếm
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FEATURES ================= -->
+        <section class="features-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        SMART TRIP
+                    </span>
+
+                    <h2>
+                        Lên kế hoạch dễ dàng hơn
+                    </h2>
+
+                    <p>
+                        Mọi thứ bạn cần để tạo nên một chuyến đi đáng nhớ.
+                    </p>
+
+                </div>
+
+
+                <div class="features-grid">
+
+
+                    <!-- Feature 1 -->
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+
+                        <h3>
+                            Khám phá địa điểm
+                        </h3>
+
+                        <p>
+                            Tìm kiếm những địa điểm du lịch
+                            hấp dẫn và phù hợp với sở thích.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+
+                        <h3>
+                            Lập lịch trình
+                        </h3>
+
+                        <p>
+                            Tạo lịch trình theo số ngày,
+                            ngân sách và sở thích của bạn.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+
+                        <h3>
+                            Quản lý ngân sách
+                        </h3>
+
+                        <p>
+                            Theo dõi chi phí để chuyến đi
+                            luôn nằm trong ngân sách.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+
+                        <h3>
+                            Lưu hành trình
+                        </h3>
+
+                        <p>
+                            Lưu lại những chuyến đi yêu thích
+                            để dễ dàng xem lại sau này.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= DESTINATIONS ================= -->
+        <section class="destinations-section">
+
+            <div class="container">
+
+                <div class="section-heading section-heading-flex">
+
+                    <div>
+
+                        <span class="section-label">
+                            ĐIỂM ĐẾN NỔI BẬT
+                        </span>
+
+                        <h2>
+                            Những nơi đang được yêu thích
+                        </h2>
+
+                    </div>
+
+
+                    <a href="destinations.html" class="view-all">
+                        Xem tất cả
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="destination-grid">
+
+
+                    <!-- Đà Lạt -->
+                    <article class="destination-card">
+
+                        <div class="destination-image">
+
+                            <img
+                                src="assets/images/dalat.jpg"
+                                alt="Đà Lạt"
+                            >
+
+                            <span class="destination-tag">
+                                Nổi bật
+                            </span>
+
+                        </div>
+
+
+                        <div class="destination-content">
+
+                            <div class="destination-location">
+                                <i class="fa-solid fa-location-dot"></i>
+                                Lâm Đồng, Việt Nam
+                            </div>
+
+                            <h3>
+                                Đà Lạt
+                            </h3>
+
+                            <p>
+                                Thành phố ngàn hoa với khí hậu
+                                mát mẻ và nhiều địa điểm check-in.
+                            </p>
+
+
+                            <div class="destination-footer">
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.8
+                                </span>
+
+                                <a href="destination-detail.html">
+                                    Xem chi tiết
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- Đà Nẵng -->
+                    <article class="destination-card">
+
+                        <div class="destination-image">
+
+                            <img
+                                src="assets/images/danang.jpg"
+                                alt="Đà Nẵng"
+                            >
+
+                            <span class="destination-tag">
+                                Biển
+                            </span>
+
+                        </div>
+
+
+                        <div class="destination-content">
+
+                            <div class="destination-location">
+                                <i class="fa-solid fa-location-dot"></i>
+                                Đà Nẵng, Việt Nam
+                            </div>
+
+                            <h3>
+                                Đà Nẵng
+                            </h3>
+
+                            <p>
+                                Thành phố biển năng động với
+                                nhiều cảnh đẹp và món ăn hấp dẫn.
+                            </p>
+
+
+                            <div class="destination-footer">
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.9
+                                </span>
+
+                                <a href="destination-detail.html">
+                                    Xem chi tiết
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- Phú Quốc -->
+                    <article class="destination-card">
+
+                        <div class="destination-image">
+
+                            <img
+                                src="assets/images/phu-quoc.jpg"
+                                alt="Phú Quốc"
+                            >
+
+                            <span class="destination-tag">
+                                Nghỉ dưỡng
+                            </span>
+
+                        </div>
+
+
+                        <div class="destination-content">
+
+                            <div class="destination-location">
+                                <i class="fa-solid fa-location-dot"></i>
+                                Kiên Giang, Việt Nam
+                            </div>
+
+                            <h3>
+                                Phú Quốc
+                            </h3>
+
+                            <p>
+                                Đảo ngọc với những bãi biển
+                                trong xanh và khung cảnh tuyệt đẹp.
+                            </p>
+
+
+                            <div class="destination-footer">
+
+                                <span>
+                                    <i class="fa-solid fa-star"></i>
+                                    4.7
+                                </span>
+
+                                <a href="destination-detail.html">
+                                    Xem chi tiết
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CTA ================= -->
+        <section class="cta-section">
+
+            <div class="container">
+
+                <div class="cta-content">
+
+                    <div>
+
+                        <span class="section-label">
+                            SẴN SÀNG CHƯA?
+                        </span>
+
+                        <h2>
+                            Chuyến đi tiếp theo
+                            đang chờ bạn.
+                        </h2>
+
+                        <p>
+                            Tạo lịch trình ngay hôm nay
+                            và bắt đầu hành trình của bạn.
+                        </p>
+
+                    </div>
+
+
+                    <a href="planner.html" class="btn btn-white">
+                        Bắt đầu lập kế hoạch
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="logo footer-logo">
+
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <div class="logo-text">
+                        <span>Smart Trip</span>
+                        <small>Planner</small>
+                    </div>
+
+                </a>
+
+
+                <p>
+                    Lên kế hoạch chuyến đi dễ dàng,
+                    khám phá nhiều hơn và tận hưởng
+                    hành trình theo cách của bạn.
+                </p>
+
+
+                <div class="social-links">
+
+                    <a href="#">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Khám phá
+                </h3>
+
+                <a href="destinations.html">
+                    Địa điểm
+                </a>
+
+                <a href="planner.html">
+                    Lập lịch trình
+                </a>
+
+                <a href="itinerary.html">
+                    Lịch trình của tôi
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Tài khoản
+                </h3>
+
+                <a href="login.html">
+                    Đăng nhập
+                </a>
+
+                <a href="register.html">
+                    Đăng ký
+                </a>
+
+                <a href="profile.html">
+                    Hồ sơ
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Liên hệ
+                </h3>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    support@smarttrip.vn
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    0123 456 789
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Smart Trip Planner. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>

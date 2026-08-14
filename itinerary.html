@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Lịch trình của tôi - Smart Trip Planner</title>
+
+
+    <!-- Google Font -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/responsive.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/animation.css"
+    >
+
+
+    <style>
+
+        /* =========================================
+           PAGE HEADER
+        ========================================= */
+
+        .itinerary-header {
+
+            padding: 65px 0;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f8f3,
+                    #eaf6ff
+                );
+
+        }
+
+
+        .itinerary-header h1 {
+
+            margin-bottom: 12px;
+
+            font-size: clamp(
+                32px,
+                5vw,
+                44px
+            );
+
+        }
+
+
+        .itinerary-header p {
+
+            max-width: 620px;
+
+            margin: auto;
+
+            color: var(--text-gray);
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .itinerary-section {
+
+            min-height: 600px;
+
+            padding: 60px 0 90px;
+
+            background: #f8fafc;
+
+        }
+
+
+        .itinerary-container {
+
+            max-width: 1000px;
+
+            margin: auto;
+
+        }
+
+
+
+        /* =========================================
+           EMPTY STATE
+        ========================================= */
+
+        .empty-itinerary {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 430px;
+
+            padding: 40px;
+
+            border: 2px dashed #dbe4e8;
+
+            border-radius: 20px;
+
+            background: white;
+
+            text-align: center;
+
+        }
+
+
+        .empty-icon {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 80px;
+
+            height: 80px;
+
+            margin-bottom: 20px;
+
+            border-radius: 50%;
+
+            background: #ecfdf5;
+
+            color: var(--primary);
+
+            font-size: 30px;
+
+        }
+
+
+        .empty-itinerary h2 {
+
+            margin-bottom: 8px;
+
+            font-size: 22px;
+
+        }
+
+
+        .empty-itinerary p {
+
+            max-width: 450px;
+
+            margin-bottom: 22px;
+
+            color: var(--text-gray);
+
+            line-height: 1.7;
+
+            font-size: 13px;
+
+        }
+
+
+        .create-trip-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 13px 20px;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        /* =========================================
+           TRIP CARD
+        ========================================= */
+
+        .trip-page {
+
+            display: none;
+
+        }
+
+
+        .trip-page.show {
+
+            display: block;
+
+        }
+
+
+        .trip-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .trip-title h2 {
+
+            margin-bottom: 7px;
+
+            font-size: 28px;
+
+        }
+
+
+        .trip-title p {
+
+            color: var(--text-gray);
+
+            font-size: 13px;
+
+        }
+
+
+        .trip-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .trip-action-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 11px 15px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: var(--text-dark);
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+        }
+
+
+        .trip-action-btn:hover {
+
+            border-color: var(--primary);
+
+            color: var(--primary);
+
+        }
+
+
+        .trip-action-btn.delete:hover {
+
+            border-color: #ef4444;
+
+            color: #ef4444;
+
+        }
+
+
+
+        /* =========================================
+           SUMMARY
+        ========================================= */
+
+        .trip-summary-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 13px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .trip-info-card {
+
+            padding: 18px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+        .trip-info-card i {
+
+            display: block;
+
+            margin-bottom: 9px;
+
+            color: var(--primary);
+
+            font-size: 18px;
+
+        }
+
+
+        .trip-info-card span {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--text-gray);
+
+            font-size: 11px;
+
+        }
+
+
+        .trip-info-card strong {
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* =========================================
+           DAY
+        ========================================= */
+
+        .saved-day {
+
+            margin-bottom: 18px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            background: white;
+
+            box-shadow: var(--shadow-sm);
+
+        }
+
+
+        .saved-day-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 17px 20px;
+
+            background: #f0fdf9;
+
+            border-bottom: 1px solid #dcefe9;
+
+        }
+
+
+        .saved-day-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .saved-day-number {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 35px;
+
+            height: 35px;
+
+            border-radius: 9px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .saved-day-title h3 {
+
+            font-size: 15px;
+
+        }
+
+
+        .saved-day-title span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--text-gray);
+
+            font-size: 11px;
+
+        }
+
+
+        .day-label {
+
+            color: var(--primary);
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        /* =========================================
+           ACTIVITIES
+        ========================================= */
+
+        .saved-activities {
+
+            padding: 7px 20px 18px;
+
+        }
+
+
+        .saved-activity {
+
+            display: grid;
+
+            grid-template-columns:
+                65px 38px minmax(0, 1fr);
+
+            gap: 8px;
+
+            min-height: 70px;
+
+            padding-top: 15px;
+
+        }
+
+
+        .activity-time {
+
+            padding-top: 5px;
+
+            color: var(--text-gray);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .activity-icon {
+
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+
+        }
+
+
+        .activity-icon::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 28px;
+
+            bottom: -24px;
+
+            width: 1px;
+
+            background: #dbe4e8;
+
+        }
+
+
+        .saved-activity:last-child
+        .activity-icon::before {
+
+            display: none;
+
+        }
+
+
+        .activity-icon i {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            background: #ecfdf5;
+
+            color: var(--primary);
+
+            font-size: 12px;
+
+        }
+
+
+        .activity-content h4 {
+
+            margin-bottom: 5px;
+
+            font-size: 13px;
+
+        }
+
+
+        .activity-content p {
+
+            color: var(--text-gray);
+
+            line-height: 1.5;
+
+            font-size: 11px;
+
+        }
+
+
+
+        /* =========================================
+           SMART NOTE
+        ========================================= */
+
+        .saved-note {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 22px;
+
+            padding: 18px;
+
+            border: 1px solid #bae6fd;
+
+            border-radius: 14px;
+
+            background: #f0f9ff;
+
+        }
+
+
+        .saved-note > i {
+
+            color: #0284c7;
+
+            font-size: 19px;
+
+        }
+
+
+        .saved-note strong {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #0369a1;
+
+            font-size: 13px;
+
+        }
+
+
+        .saved-note p {
+
+            color: #475569;
+
+            line-height: 1.6;
+
+            font-size: 11px;
+
+        }
+
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 800px) {
+
+            .trip-summary-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .trip-top {
+
+                flex-direction: column;
+
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .itinerary-section {
+
+                padding: 40px 0 60px;
+
+            }
+
+
+            .trip-summary-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+
+            .trip-actions {
+
+                width: 100%;
+
+            }
+
+
+            .trip-action-btn {
+
+                flex: 1;
+
+                justify-content: center;
+
+            }
+
+
+            .saved-activity {
+
+                grid-template-columns:
+                    50px 35px minmax(0, 1fr);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         HEADER
+    ========================================= -->
+
+    <header class="header">
+
+        <div class="container navbar">
+
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+
+                <div class="logo-text">
+
+                    <span>Smart Trip</span>
+
+                    <small>Planner</small>
+
+                </div>
+
+            </a>
+
+
+
+            <nav class="nav-menu">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Trang chủ
+
+                </a>
+
+
+                <a
+                    href="destinations.html"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-compass"></i>
+
+                    Khám phá
+
+                </a>
+
+
+                <a
+                    href="planner.html"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Lập lịch trình
+
+                </a>
+
+
+                <a
+                    href="itinerary.html"
+                    class="nav-link active"
+                >
+
+                    <i class="fa-solid fa-map"></i>
+
+                    Lịch trình của tôi
+
+                </a>
+
+            </nav>
+
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="login.html"
+                    class="login-btn"
+                >
+                    Đăng nhập
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="register-btn"
+                >
+                    Đăng ký
+                </a>
+
+            </div>
+
+
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         PAGE HEADER
+    ========================================= -->
+
+    <section class="itinerary-header">
+
+        <div class="container">
+
+            <h1>
+                Lịch trình của tôi 🗺️
+            </h1>
+
+            <p>
+                Xem lại chuyến đi đã được tạo
+                và lưu lại những kế hoạch
+                du lịch của bạn.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================= -->
+
+    <main class="itinerary-section">
+
+        <div class="container">
+
+            <div class="itinerary-container">
+
+
+                <!-- =================================
+                     EMPTY
+                ================================= -->
+
+                <div
+                    class="empty-itinerary"
+                    id="emptyItinerary"
+                >
+
+                    <div class="empty-icon">
+
+                        <i class="fa-solid fa-map-location-dot"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Bạn chưa có lịch trình nào
+                    </h2>
+
+
+                    <p>
+                        Hãy tạo một lịch trình thông minh
+                        để bắt đầu lên kế hoạch cho
+                        chuyến đi tiếp theo của bạn.
+                    </p>
+
+
+                    <a
+                        href="planner.html"
+                        class="create-trip-btn"
+                    >
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                        Tạo lịch trình
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- =================================
+                     TRIP
+                ================================= -->
+
+                <div
+                    class="trip-page"
+                    id="tripPage"
+                >
+
+
+                    <!-- Top -->
+
+                    <div class="trip-top">
+
+
+                        <div class="trip-title">
+
+                            <h2 id="tripDestination">
+                                ---
+                            </h2>
+
+                            <p id="tripDate">
+                                ---
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="trip-actions">
+
+
+                            <a
+                                href="planner.html"
+                                class="trip-action-btn"
+                            >
+
+                                <i class="fa-solid fa-pen"></i>
+
+                                Chỉnh sửa
+
+                            </a>
+
+
+                            <button
+                                class="trip-action-btn delete"
+                                id="deleteTripBtn"
+                            >
+
+                                <i class="fa-solid fa-trash"></i>
+
+                                Xóa
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Summary -->
+
+                    <div class="trip-summary-grid">
+
+
+                        <div class="trip-info-card">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <span>
+                                Điểm đến
+                            </span>
+
+                            <strong id="infoDestination">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                        <div class="trip-info-card">
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                            <span>
+                                Thời gian
+                            </span>
+
+                            <strong id="infoDays">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                        <div class="trip-info-card">
+
+                            <i class="fa-solid fa-users"></i>
+
+                            <span>
+                                Số người
+                            </span>
+
+                            <strong id="infoPeople">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                        <div class="trip-info-card">
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                            <span>
+                                Ngân sách
+                            </span>
+
+                            <strong id="infoBudget">
+                                ---
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- Generated days -->
+
+                    <div id="savedItinerary"></div>
+
+
+
+                    <!-- Smart note -->
+
+                    <div class="saved-note">
+
+                        <i class="fa-solid fa-lightbulb"></i>
+
+                        <div>
+
+                            <strong>
+                                Smart Suggestion
+                            </strong>
+
+                            <p id="savedNoteText">
+                                Lịch trình được tạo
+                                dựa trên thông tin
+                                chuyến đi của bạn.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="index.html"
+                    class="logo footer-logo"
+                >
+
+                    <div class="logo-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+
+                    <div class="logo-text">
+
+                        <span>Smart Trip</span>
+
+                        <small>Planner</small>
+
+                    </div>
+
+                </a>
+
+
+                <p>
+                    Lên kế hoạch chuyến đi dễ dàng,
+                    khám phá nhiều hơn và tận hưởng
+                    hành trình theo cách của bạn.
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Khám phá
+                </h3>
+
+                <a href="destinations.html">
+                    Địa điểm
+                </a>
+
+                <a href="planner.html">
+                    Lập lịch trình
+                </a>
+
+                <a href="itinerary.html">
+                    Lịch trình của tôi
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Tài khoản
+                </h3>
+
+                <a href="login.html">
+                    Đăng nhập
+                </a>
+
+                <a href="register.html">
+                    Đăng ký
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Liên hệ
+                </h3>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    support@smarttrip.vn
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    0123 456 789
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Smart Trip Planner.
+                    All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- JS -->
+
+    <script src="assets/js/main.js"></script>
+
+    <script src="assets/js/itinerary.js"></script>
+
+</body>
+
+</html>
